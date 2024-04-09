@@ -26,8 +26,10 @@
     </li>
     <li>
     　<a href="#実行操作方法">実行・操作方法</a>
-    　<a href="#subscribers--publishers">Subscribers and Publishers</a>
-    　<a href="#services">Services</a>
+      <ul>
+        <li><a href="#subscribers--publishers">Subscribers and Publishers</a></li>
+        <li><a href="#services">Services</a></li>
+      </ul>
     </li>
     <li><a href="#マイルストーン">マイルストーン</a></li>
     <!-- <li><a href="#contributing">Contributing</a></li> -->
