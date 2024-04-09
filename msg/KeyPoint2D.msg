@@ -1,4 +1,5 @@
 string name
+string gesture
 float64 confidence
 
 geometry_msgs/Point wrist
