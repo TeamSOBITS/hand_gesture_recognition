@@ -1,5 +1,6 @@
 #!/usr/bin/env python3.9
 # -*- coding: utf-8 -*-
+
 import csv
 import copy
 import itertools
@@ -36,7 +37,7 @@ class GestureRecognition:
         mp_hands = mp.solutions.hands
         hands = mp_hands.Hands(
             static_image_mode=self.use_static_image_mode,
-            max_num_hands=1,
+            max_num_hands=2,
             min_detection_confidence=self.min_detection_confidence,
             min_tracking_confidence=self.min_tracking_confidence,
         )
@@ -72,6 +73,17 @@ class GestureRecognition:
         results = self.hands.process(image)
         image.flags.writeable = True
 
+        hand_lm = []
+        position = ""
+        confidence = 0.0
+        id = 0
+
+        gestures = []
+        hand_lms = []
+        positions = []
+        confidences = []
+        ids = []
+
         #  ####################################################################
         if results.multi_hand_landmarks is not None:
             for hand_landmarks, handedness in zip(results.multi_hand_landmarks,
@@ -101,8 +113,26 @@ class GestureRecognition:
                 # Saving gesture
                 #gesture_id = hand_sign_id
                 gesture = self.keypoint_classifier_labels[hand_sign_id]
+                gestures.append(gesture)
 
-        return debug_image, gesture
+                # Save the landmark points
+                hand_lm = landmark_list
+                hand_lms.append(hand_lm)
+
+                # Save the position of the hand
+                position = handedness.classification[0].label[0:]
+                positions.append(position)
+
+                # Save the confidence of the hand
+                confidence = handedness.classification[0].score
+                confidences.append(confidence)
+
+                # Save the index of the hand
+                # id = handedness.classification[0].index
+                # ids.append(id)
+
+
+        return debug_image, gestures, hand_lms, positions, confidences
 
     def draw_fps_info(self, image, fps):
         cv.putText(image, "FPS:" + str(fps), (10, 30), cv.FONT_HERSHEY_SIMPLEX,
