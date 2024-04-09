@@ -18,9 +18,6 @@ from sobits_msgs.srv import RunCtrl, RunCtrlResponse
 class HandSignRecognition:
 
     def __init__(self):
-        # Creates a node with name 'hand_sign_recognition' and make sure it is a
-        # unique node (using anonymous=True).
-        rospy.init_node('hand_sign_recognition', anonymous=True)
 
         # Set params for Network
         self.keypoint_classifier_label = rospy.get_param("~keypoint_classifier_label")
@@ -33,12 +30,12 @@ class HandSignRecognition:
         self.img_pub_flag    = rospy.get_param( "~pose_2d_img_pub",  True )
 
         self.sub_img_topic_name = rospy.get_param("~sub_img_topic_name", "/camera/rgb/image_raw")
+        self.pub_img_topic_name = rospy.get_param("~pub_img_topic_name", "~pose_img")
         self.pub_ges_topic_name = rospy.get_param("~pub_ges_topic_name", "~gesture")
         self.pub_hand_lm_topic_name = rospy.get_param("~pub_hand_lm_topic_name", "~pose_array")
 
-
         self.sub_img          = rospy.Subscriber(self.sub_img_topic_name, Image, self.img_cb)
-        self.pub_result_img   = rospy.Publisher("~pose_img", Image, queue_size=10)
+        self.pub_result_img   = rospy.Publisher(self.pub_img_topic_name, Image, queue_size=10)
         self.pub_gesture      = rospy.Publisher(self.pub_ges_topic_name, String, queue_size=10)
         self.pub_result_array = rospy.Publisher(self.pub_hand_lm_topic_name, KeyPoint2DArray, queue_size=10)
         self.server           = rospy.Service("~run_ctr", RunCtrl, self.run_ctrl_server)
@@ -138,6 +135,9 @@ class HandSignRecognition:
         
 
 if __name__=="__main__":
+    # Initialize the node
+    rospy.init_node('hand_sign_recognition_demo', anonymous=True)
+
     try:
         hand_sign = HandSignRecognition()
         rospy.spin()
