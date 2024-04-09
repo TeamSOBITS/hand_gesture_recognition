@@ -8,7 +8,7 @@
 [![Issues][issues-shield]][issues-url]
 [![License][license-shield]][license-url]
 
-# SOBIT PRO
+# Hand Gesture Recognition
 
 <!-- TABLE OF CONTENTS -->
 <details>
