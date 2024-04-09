@@ -1,0 +1,29 @@
+string name
+float64 confidence
+
+geometry_msgs/Point wrist
+
+geometry_msgs/Point thumb_cmc
+geometry_msgs/Point thumb_mcp
+geometry_msgs/Point thumb_ip
+geometry_msgs/Point thumb_tip
+
+geometry_msgs/Point index_finger_mcp
+geometry_msgs/Point index_finger_pip
+geometry_msgs/Point index_finger_dip
+geometry_msgs/Point index_finger_tip
+
+geometry_msgs/Point middle_finger_mcp
+geometry_msgs/Point middle_finger_pip
+geometry_msgs/Point middle_finger_dip
+geometry_msgs/Point middle_finger_tip
+
+geometry_msgs/Point ring_finger_mcp
+geometry_msgs/Point ring_finger_pip
+geometry_msgs/Point ring_finger_dip
+geometry_msgs/Point ring_finger_tip
+
+geometry_msgs/Point pinky_mcp
+geometry_msgs/Point pinky_pip
+geometry_msgs/Point pinky_dip
+geometry_msgs/Point pinky_tip
