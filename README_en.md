@@ -26,6 +26,8 @@
     </li>
     <li>
     　<a href="#launch-and-usage">Launch and Usage</a>
+    　<a href="#subscribers--publishers">Subscribers and Publishers</a>
+    　<a href="#services">Services</a>
     </li>
     <li><a href="#milestone">Milestone</a></li>
     <!-- <li><a href="#contributing">Contributing</a></li> -->
