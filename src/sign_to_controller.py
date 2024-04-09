@@ -10,7 +10,7 @@ class GestureController:
     def __init__(self):
         rospy.init_node('hand_sign_control', anonymous=True)
         # Subscriber for subscribing the hand signs
-        self.gesture_subcriber = rospy.Subscriber(rospy.get_param("hand_sign_recognition/publish_gesture_topic"), 
+        self.gesture_subcriber = rospy.Subscriber(rospy.get_param("hand_sign_recognition/pub_ges_topic_name"), 
                                                 String, self.callback)
         # Publisher for publishing velocities 
         self.vel_publisher = rospy.Publisher("/robot_diff_drive_controller/cmd_vel", Twist, queue_size=10)
