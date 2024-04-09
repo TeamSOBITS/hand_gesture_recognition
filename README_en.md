@@ -194,8 +194,8 @@ Please, use at your own risk if you are installing it in a local environment.
 <!-- MILESTONE -->
 ## Milestone
 
-- [] Allow more than 2 (two) hand detection
-- [] Implement hand identification
+- [ ] Allow more than 2 (two) hand detection
+- [ ] Implement hand identification
 - [x] OSS
     - [x] Improved documentation
     - [x] Unified coding style
