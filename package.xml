@@ -1,36 +1,18 @@
 <?xml version="1.0"?>
-<?xml-model
-  href="http://download.ros.org/schema/package_format3.xsd"
-  schematypens="http://www.w3.org/2001/XMLSchema"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
   <name>hand_gesture_recognition</name>
   <version>0.0.0</version>
-  <description>
-    The hand_gesture_recognition package
-  </description>
-  <author email="TrinhNC@todo.com">TrinhNC</author>
-  <maintainer email="kvalentincardenas@gmail.com">Keith Valentin</maintainer>
+  <description>TODO: Package description</description>
+  <maintainer email="adachidaichi0828@gmail.com">sobits</maintainer>
+  <license>TODO: License declaration</license>
 
-  <license>MIT</license>
+  <test_depend>ament_copyright</test_depend>
+  <test_depend>ament_flake8</test_depend>
+  <test_depend>ament_pep257</test_depend>
+  <test_depend>python3-pytest</test_depend>
 
-  <url type="website">https://home.soka.ac.jp/~choi/index.html</url>
-  <url type="repository">https://github.com/TeamSOBITS/hand_gesture_recognition</url>
-  <url type="bugtracker">https://github.com/TeamSOBITS/hand_gesture_recognition/issues</url>
-
-  <buildtool_depend>catkin</buildtool_depend>
-
-  <depend>rospy</depend>
-  <depend>std_msgs</depend>
-  <depend>sensor_msgs</depend>
-  <depend>geometry_msgs</depend>
-  <depend>message_generation</depend>
-  <depend>message_runtime</depend>
-  <depend>sobits_msgs</depend>
-
-
-  <!-- The export tag contains other, unspecified, tags -->
   <export>
-    <!-- Other tools can request additional information be placed here -->
-
+    <build_type>ament_python</build_type>
   </export>
 </package>

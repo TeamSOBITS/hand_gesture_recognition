@@ -43,7 +43,7 @@
 <!-- レポジトリの概要 -->
 ## 概要
 
-本レポジトリは，手の2次元の骨格を検出し，ROS上でその結果をpublishすることを可能とする．
+本レポジトリは，手の2次元の骨格を検出し，ROS2でその結果をpublishすることを可能とする．
 
 > [!WARNING]
 > 現段階では，手や人追従の機能が導入されていないため，手の検出を2つに限られている．
@@ -96,46 +96,45 @@
 
 | System  | Version |
 | ------------- | ------------- |
-| Ubuntu | 20.04 (Focal Fossa) |
-| ROS | Noetic Ninjemys |
+| Ubuntu | 22.04 (Jammy Jellyfish) |
+| ROS | Humble Hawksbill |
 | OpenCV | 4.9.0 (Tested) |
-| Python | 3.9* |
+| Python | >=3.10 |
 
 > [!NOTE]
 > `Ubuntu`や`ROS`のインストール方法に関しては，[SOBITS Manual](https://github.com/TeamSOBITS/sobits_manual#%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6)に参照してください．
 
-> [!WARNING]
-> `install.sh`を実行することによって，Python 3.9が自動的にインストールされる．
-よって，ローカル環境の場合は注意を払うことが求められる．
 
 <p align="right">(<a href="#readme-top">上に戻る</a>)</p>
 
 
 ### インストール方法
 
-1. ROSの`src`フォルダに移動します．
+1. ROS2の`src`フォルダに移動します．
    ```sh
-   $ roscd
-   # もしくは，"cd ~/catkin_ws/"へ移動．
-   $ cd src/
+   cd ~/colcon_ws/src/
    ```
 2. 本レポジトリをcloneします．
    ```sh
-   $ git clone https://github.com/TeamSOBITS/hand_gesture_recognition
+   git clone -b humble-devel https://github.com/TeamSOBITS/hand_gesture_recognition
    ```
 3. レポジトリの中へ移動します．
    ```sh
-   $ cd hand_gesture_recognition/
+   cd hand_gesture_recognition/
    ```
 4. 依存パッケージをインストールします．
    ```sh
-   $ bash install.sh
+   bash install.sh
    ```
 5. パッケージをコンパイルします．
    ```sh
-   $ roscd
-   # もしくは，"cd ~/catkin_ws/"へ移動．
-   $ catkin_make
+   cd ~/colcon_ws/
+   ```
+   ```sh
+   colcon build --symlink-install
+   ```
+   ```sh
+   source ~/colcon_ws/install/setup.sh
    ```
 
 <p align="right">(<a href="#readme-top">上に戻る</a>)</p>
@@ -144,26 +143,14 @@
 <!-- 実行・操作方法 -->
 ## 実行・操作方法
 
-TBD
 
-1. hand_gesture_recognitionの起動する機能をパラメタとして[hand_sign.launch](launch/hand_sign.launch)に設定します．
-   ```xml
-   <!-- Allow 2D pose detection (true) -->
-   <arg name="pose_2d_detect"            default="true"/>
-
-   <!-- Show 2D pose detection result as a log (true) -->
-   <arg name="pose_2d_log_show"          default="true"/>
-   <!-- Show 2D pose detection result as an image (true) -->
-   <arg name="pose_2d_img_show"          default="true"/>
-   <!-- Publish 2D pose detection result as an image (true) -->
-   <arg name="pose_2d_img_pub"           default="true"/>
-
-   <!-- Subscribe to camera topic -->
-   <arg name="sub_img_topic_name"        default="/camera/rgb/image_raw"/>
+1. カメラを起動し，[hand_gesture_recognition.launch.py](https://github.com/TeamSOBITS/hand_gesture_recognition/blob/humble-devel/launch/hand_gesture_recognition.launch.py)の**image_topic_name**を使用するカメラのトピック名に書き換える．
+   
+   例
+   ```sh
+   default_value="/camera/color/image_raw"          # orbbec_series
    ```
 
-> [!NOTE]
-> 使用したい機能に応じて，`true`か`false`かに書き換えてください．
 
 2. [hand_sign.launch](launch/hand_sign.launch)というlaunchファイルを実行します．
    ```sh
@@ -185,16 +172,16 @@ TBD
 
 | Topic | Type | Meaning |
 | --- | --- | --- |
-| /hand_gesture_recognition/pose_array | hand_gesture_recognition/KeyPoint2DArray | 2次元の骨格情報 |
-| /hand_gesture_recognition/pose_img   | sensor_msgs/Image                        | 2次元の骨格画像 |
-| /hand_gesture_recognition/gesture    | string                                   | ジェスチャー結果  |
+| /hand_gesture/pose_array | sobits_interfaces/KeyPointArray | 2次元の骨格情報 |
+| /hand_gesture/hand_pose_img  | sensor_msgs/Image                        | 2次元の骨格画像 |
+| /hand_gesture/gesture_name    | sobits_interfaces/StringArray                                   | ジェスチャー結果  |
 
 
 ### Services
 
 | Service | Type | Meaning |
 | --- | --- | --- |
-| /hand_gesture_recognition/run_ctr | sobits_msgs/RunCtrl | 2次元検出の切り替え(ON:`true`, OFF:`false`) |
+| /hand_gesture/run_ctr | std_msgs/SetBool | 2次元検出の切り替え(ON:`true`, OFF:`false`) |
 
 
 <!-- マイルストーン -->

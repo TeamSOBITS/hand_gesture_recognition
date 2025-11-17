@@ -96,17 +96,14 @@ First, please set up the following environment before proceeding to the next ins
 
 | System  | Version |
 | ------------- | ------------- |
-| Ubuntu | 20.04 (Focal Fossa) |
-| ROS | Noetic Ninjemys |
+| Ubuntu | 22.04 (Jammy Jellyfish) |
+| ROS | Humble Hawksbill |
 | OpenCV | 4.9.0 (Tested) |
-| Python | 3.9* |
+| Python | >=3.10 |
 
 > [!NOTE]
 > If you need to install `Ubuntu` or `ROS`, please check our [SOBITS Manual](https://github.com/TeamSOBITS/sobits_manual#%E9%96%8B%E7%99%BA%E7%92%B0%E5%A2%83%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6).
 
-> [!WARNING]
-> Python 3.9 is installed within `install.sh`.
-Please, use at your own risk if you are installing it in a local environment.
 
 <p align="right">(<a href="#readme-top">上に戻る</a>)</p>
 
@@ -115,27 +112,29 @@ Please, use at your own risk if you are installing it in a local environment.
 
 1. Go to the `src` folder of ROS.
    ```sh
-   $ roscd
-   # Or just use "cd ~/catkin_ws/" and change directory.
-   $ cd src/
+   cd ~/colcon_ws/src/
    ```
 2. Clone this repository.
    ```sh
-   $ git clone https://github.com/TeamSOBITS/hand_gesture_recognition
+   git clone -b humble-devel https://github.com/TeamSOBITS/hand_gesture_recognition
    ```
 3. Navigate into the repository.
    ```sh
-   $ cd hand_gesture_recognition/
+   cd hand_gesture_recognition/
    ```
 4. Install the dependent packages.
    ```sh
-   $ bash install.sh
+   bash install.sh
    ```
 5. Compile the package.
    ```sh
-   $ roscd
-   # Or just use "cd ~/catkin_ws/" and change directory.
-   $ catkin_make
+   cd ~/colcon_ws/
+   ```
+   ```sh
+   colcon build --symlink-install
+   ```
+   ```sh
+   source ~/colcon_ws/install/setup.sh
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -144,27 +143,14 @@ Please, use at your own risk if you are installing it in a local environment.
 <!-- LAUNCH AND USAGE EXAMPLES -->
 ## Launch and Usage
 
-1. Set the parameters inside [hand_sign.launch](launch/hand_sign.launch) and select the functions to launch with hand_gesture_recognition.
-   ```xml
-   <!-- Allow 2D pose detection (true) -->
-   <arg name="pose_2d_detect"            default="true"/>
-
-   <!-- Show 2D pose detection result as a log (true) -->
-   <arg name="pose_2d_log_show"          default="true"/>
-   <!-- Show 2D pose detection result as an image (true) -->
-   <arg name="pose_2d_img_show"          default="true"/>
-   <!-- Publish 2D pose detection result as an image (true) -->
-   <arg name="pose_2d_img_pub"           default="true"/>
-
-   <!-- Subscribe to camera topic -->
-   <arg name="sub_img_topic_name"        default="/camera/rgb/image_raw"/>
-   ```
-> [!NOTE]
-> Rewrite it as `true` or `false` depending on the functions you want to use.
-
-2. Execute the launch file [hand_sign.launch](launch/hand_sign.launch).
+1. Start the camera and change image_topic_name in [hand_gesture_recognition.launch.py](launch/hand_gesture_recognition.launch.py) to the topic name of the camera you are using.
    ```sh
-   $ roslaunch hand_gesture_recognition hand_sign.launch
+   default_value="/camera/color/image_raw"          # orbbec_series
+   ```
+
+2. Execute the launch file [hand_gesture_recognition.launch](launch/hand_gesture_recognition.launch.py).
+   ```sh
+   ros2 launch hand_gesture_recognition hand_gesture_recognition.launch
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -182,16 +168,16 @@ Please, use at your own risk if you are installing it in a local environment.
 
 | Topic | Type | Meaning |
 | --- | --- | --- |
-| /hand_gesture_recognition/pose_array | hand_gesture_recognition/KeyPoint2DArray | 2D Pose result information |
-| /hand_gesture_recognition/pose_img   | sensor_msgs/Image                        | 2D Pose result image |
-| /hand_gesture_recognition/gesture    | string                                   | Hand Gesture result  |
+| /hand_gesture/pose_array | sobits_interfaces/KeyPointArray | 2D Pose result information |
+| /hand_gesture/hand_pose_img  | sensor_msgs/Image                        | 2D Pose result image |
+| /hand_gesture/gesture_name    | sobits_interfaces/StringArray                                   | Hand Gesture result  |
 
 
 ### Services
 
 | Service | Type | Meaning |
 | --- | --- | --- |
-| /hand_gesture_recognition/run_ctr | sobits_msgs/RunCtrl | 2D Pose Detection toogle (ON:`true`, OFF:`false`) |
+| /hand_gesture/run_ctr | std_msgs/SetBool  | 2D Pose Detection toogle (ON:`true`, OFF:`false`) |
 
 
 <!-- MILESTONE -->

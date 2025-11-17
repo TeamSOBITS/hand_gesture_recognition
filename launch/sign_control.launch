@@ -1,6 +1,0 @@
-<launch>
-    <include file="$(find my_cam)/launch/my_cam.launch" />
-    <include file="$(find hand_gesture_recognition)/launch/hand_sign.launch" />
-
-    <node name="sign_to_controller" pkg="hand_gesture_recognition" type="sign_to_controller.py" output="screen" />
-</launch>
