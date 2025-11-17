@@ -148,9 +148,9 @@ First, please set up the following environment before proceeding to the next ins
    default_value="/camera/color/image_raw"          # orbbec_series
    ```
 
-2. Execute the launch file [hand_gesture_recognition.launch](launch/hand_gesture_recognition.launch.py).
+2. Execute the launch file [hand_gesture_recognition.launch.py](launch/hand_gesture_recognition.launch.py).
    ```sh
-   ros2 launch hand_gesture_recognition hand_gesture_recognition.launch
+   ros2 launch hand_gesture_recognition hand_gesture_recognition.launch.py
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>

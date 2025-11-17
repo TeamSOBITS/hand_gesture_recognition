@@ -152,9 +152,9 @@
    ```
 
 
-2. [hand_sign.launch](launch/hand_sign.launch)というlaunchファイルを実行します．
+2. [hand_gesture_recognition.launch.py](launch/hand_gesture_reognition.launch)というlaunchファイルを実行します．
    ```sh
-   $ roslaunch hand_gesture_recognition hand_sign.launch
+   ros2 launch hand_gesture_recognition hand_gesture_recognition.launch.py
    ```
 
 <p align="right">(<a href="#readme-top">上に戻る</a>)</p>
