@@ -8,6 +8,7 @@ import cv2 as cv
 import numpy as np
 import mediapipe as mp
 from .model.keypoint_classifier import KeyPointClassifier
+from .model.point_history_classifier import PointHistoryClassifier
 
 
 class GestureRecognition:
@@ -83,6 +84,7 @@ class GestureRecognition:
         positions = []
         confidences = []
         ids = []
+        brects = []
 
         #  ####################################################################
         if results.multi_hand_landmarks is not None:
@@ -127,12 +129,14 @@ class GestureRecognition:
                 confidence = handedness.classification[0].score
                 confidences.append(confidence)
 
+                brects.append(brect)
+
                 # Save the index of the hand
                 # id = handedness.classification[0].index
                 # ids.append(id)
 
 
-        return debug_image, gestures, hand_lms, positions, confidences
+        return debug_image, gestures, hand_lms, positions, confidences , brects
 
     def draw_fps_info(self, image, fps):
         cv.putText(image, "FPS:" + str(fps), (10, 30), cv.FONT_HERSHEY_SIMPLEX,

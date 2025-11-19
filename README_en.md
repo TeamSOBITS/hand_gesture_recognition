@@ -170,7 +170,7 @@ First, please set up the following environment before proceeding to the next ins
 | --- | --- | --- |
 | /hand_gesture/pose_array | sobits_interfaces/KeyPointArray | 2D Pose result information |
 | /hand_gesture/hand_pose_img  | sensor_msgs/Image                        | 2D Pose result image |
-| /hand_gesture/gesture_name    | sobits_interfaces/StringArray                                   | Hand Gesture result  |
+| /hand_gesture/gesture_name    | vision_msgs/Detection2DArray                                      | Hand Gesture result  |
 
 
 ### Services

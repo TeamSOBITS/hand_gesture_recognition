@@ -174,7 +174,7 @@
 | --- | --- | --- |
 | /hand_gesture/pose_array | sobits_interfaces/KeyPointArray | 2次元の骨格情報 |
 | /hand_gesture/hand_pose_img  | sensor_msgs/Image                        | 2次元の骨格画像 |
-| /hand_gesture/gesture_name    | sobits_interfaces/StringArray                                   | ジェスチャー結果  |
+| /hand_gesture/gesture_name    | vision_msgs/Detection2DArray                                   | ジェスチャー結果  |
 
 
 ### Services

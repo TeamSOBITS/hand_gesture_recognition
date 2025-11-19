@@ -13,6 +13,8 @@ setup(
             ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share', package_name, "launch"), glob('launch/*')),
+        (os.path.join('share',package_name,'model/keypoint_classifier'),glob('model/keypoint_classifier/*')),
+        (os.path.join('share',package_name,'model/point_history_classifier'),glob('model/point_history_classifier/*')),
     ],
     install_requires=['setuptools'],
     zip_safe=True,
