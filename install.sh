@@ -6,8 +6,8 @@ echo "╔══╣ Install: hand_gesture_recognition (STARTING) ╠══╗"
 # Install dependencies
 cd ..
 git clone -b $ROS_DISTRO-devel https://github.com/TeamSOBITS/sobits_interfaces.git
-git clone -b ${ROS_DISTRO}-devel https://github.com/TeamSOBITS/bbox_to_tf.git
-cd bbox_to_tf/
+git clone -b ${ROS_DISTRO}-devel https://github.com/TeamSOBITS/image_to_position.git
+cd imaget_to_position/
 bash install.sh
 cd ..
 
